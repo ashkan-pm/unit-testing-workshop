@@ -5,7 +5,12 @@ module.exports = {
   plugins: [
     {
       plugin: CracoAntDesignPlugin,
-      options: { customizeTheme: getThemeVariables({ dark: true }) },
+      options: {
+        customizeTheme: {
+          ...getThemeVariables({ dark: true }),
+          "body-background": "#222",
+        },
+      },
     },
   ],
 };
