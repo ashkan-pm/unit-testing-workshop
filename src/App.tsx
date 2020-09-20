@@ -1,13 +1,8 @@
 import React from 'react';
-import { Button } from 'antd';
-import Layout from 'components/Layout';
+import Router from './Router';
 
 function App() {
-  return (
-    <Layout>
-      <Button>Learn React</Button>
-    </Layout>
-  );
+  return <Router />;
 }
 
 export default App;

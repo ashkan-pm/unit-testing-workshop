@@ -1,11 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { LayoutWrapper } from './styles';
 
-type Props = {
-  children: React.ReactNode;
-};
-function Layout({ children }: Props) {
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+function Layout() {
+  return (
+    <LayoutWrapper>
+      <Outlet />
+    </LayoutWrapper>
+  );
 }
 
 export default Layout;
