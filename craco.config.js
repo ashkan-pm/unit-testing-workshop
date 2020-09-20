@@ -1,5 +1,5 @@
-const CracoAntDesignPlugin = require("craco-antd");
-const { getThemeVariables } = require("antd/dist/theme");
+const CracoAntDesignPlugin = require('craco-antd');
+const { getThemeVariables } = require('antd/dist/theme');
 
 module.exports = {
   plugins: [
@@ -8,9 +8,9 @@ module.exports = {
       options: {
         customizeTheme: {
           ...getThemeVariables({ dark: true }),
-          "body-background": "#222",
-        },
-      },
-    },
-  ],
+          'body-background': '#222'
+        }
+      }
+    }
+  ]
 };

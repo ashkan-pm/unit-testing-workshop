@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.6.5",
     "craco-antd": "^1.18.1",
+    "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
@@ -21,7 +22,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "eslintConfig": {
     "extends": "react-app"
