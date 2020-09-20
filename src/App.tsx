@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from 'antd';
-import './App.css';
+import Layout from 'components/Layout';
 
 function App() {
   return (
-    <div className="App">
+    <Layout>
       <Button>Learn React</Button>
-    </div>
+    </Layout>
   );
 }
 
