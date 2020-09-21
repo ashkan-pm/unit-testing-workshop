@@ -5,7 +5,7 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
-        home: 'Home',
+        welcome: 'Welcome',
         notFound: 'You seem to have lost your way...',
         login: 'Who are you?',
         email: 'Email',

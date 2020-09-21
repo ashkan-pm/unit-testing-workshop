@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Typography, Form } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { State } from 'redux/ducks/reducers';
-import { updateLogin } from 'redux/ducks/login';
+import { updateUser } from 'redux/ducks/user';
 import { networkErrorNotification } from 'components/ErrorTranslation';
 import { isGmailAddress } from 'helpers/validators';
 import { verify } from 'helpers/api';
@@ -15,7 +15,7 @@ type Props = {
   onSubmit: () => void;
 };
 function GetCode({ onSubmit }: Props) {
-  const { email } = useSelector((state: State) => state.login, shallowEqual);
+  const { email } = useSelector((state: State) => state.user, shallowEqual);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -38,7 +38,7 @@ function GetCode({ onSubmit }: Props) {
     try {
       setIsLoading(true);
       await verify(email);
-      dispatch(updateLogin({ email }));
+      dispatch(updateUser({ email }));
       onSubmit();
     } catch (error) {
       networkErrorNotification(error.message);
