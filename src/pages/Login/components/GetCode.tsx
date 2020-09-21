@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Typography, Form } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { State } from 'redux/ducks/reducers';
+import { updateLogin } from 'redux/ducks/login';
 import { networkErrorNotification } from 'components/ErrorTranslation';
 import { isGmailAddress } from 'helpers/validators';
 import { verify } from 'helpers/api';
@@ -12,8 +15,10 @@ type Props = {
   onSubmit: () => void;
 };
 function GetCode({ onSubmit }: Props) {
-  const { t } = useTranslation();
+  const { email } = useSelector((state: State) => state.login, shallowEqual);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const normalizeEmail = (value: string) => value.trim();
   const emailRules: Rule[] = [
@@ -33,6 +38,7 @@ function GetCode({ onSubmit }: Props) {
     try {
       setIsLoading(true);
       await verify(email);
+      dispatch(updateLogin({ email }));
       onSubmit();
     } catch (error) {
       networkErrorNotification(error.message);
@@ -43,7 +49,7 @@ function GetCode({ onSubmit }: Props) {
   return (
     <FormWrapper>
       <Title level={4}>{t('login')}</Title>
-      <Form onFinish={handleFinish} requiredMark={false}>
+      <Form initialValues={{ email }} onFinish={handleFinish} requiredMark={false}>
         <Form.Item
           label={t('email')}
           name="email"

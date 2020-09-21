@@ -4,7 +4,7 @@ import GetCode from './components/GetCode';
 import Verify from './components/Verify';
 
 function Login() {
-  const [isVerify, setIsVerify] = useState(true);
+  const [isVerify, setIsVerify] = useState(false);
 
   const showGetCode = () => {
     setIsVerify(false);

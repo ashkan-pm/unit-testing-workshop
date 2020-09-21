@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { shallowEqual, useSelector } from 'react-redux';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { State } from 'redux/ducks/reducers';
 import OTPInput from 'components/OTPInput';
 import { networkErrorNotification } from 'components/ErrorTranslation';
 import { login } from 'helpers/api';
@@ -12,6 +14,7 @@ type Props = {
   onBack: () => void;
 };
 function Verify({ onBack }: Props) {
+  const { email } = useSelector((state: State) => state.login, shallowEqual);
   const [values, setValues] = useState(Array(6).fill(''));
   const [isInvalid, setIsInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +36,7 @@ function Verify({ onBack }: Props) {
       }
 
       setIsLoading(true);
-      await login('unit@gmail.com', value);
+      await login(email, value);
       navigate('/');
     } catch (error) {
       networkErrorNotification(error.message);
