@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography, Button } from 'antd';
-import { VerifyWrapper, StyledOTPInput } from './styles';
+import { FormWrapper, StyledOTPInput } from './styles';
 const { Title } = Typography;
 
 type Props = {
@@ -11,14 +11,14 @@ function Verify({ onBack }: Props) {
   const { t } = useTranslation();
 
   return (
-    <VerifyWrapper>
+    <FormWrapper>
       <Title level={4}>{t('proveIt')}</Title>
       <StyledOTPInput />
       <div>
         <Button onClick={onBack}>{t('goBack')}</Button>
         <Button type="primary">{t('verify')}</Button>
       </div>
-    </VerifyWrapper>
+    </FormWrapper>
   );
 }
 

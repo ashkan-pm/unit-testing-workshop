@@ -10,7 +10,7 @@ export const StyledButton = styled(Button)`
   margin-top: 8px;
 `;
 
-export const VerifyWrapper = styled.div`
+export const FormWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;

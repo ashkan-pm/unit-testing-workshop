@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Typography, Form } from 'antd';
 import { Rule } from 'antd/lib/form';
 import { isGmailAddress } from 'helpers/validators';
-import { StyledInput, StyledButton } from './styles';
+import { FormWrapper, StyledInput, StyledButton } from './styles';
 const { Title } = Typography;
 
 type Props = {
@@ -31,7 +31,7 @@ function GetCode({ onSubmit }: Props) {
   };
 
   return (
-    <>
+    <FormWrapper>
       <Title level={4}>{t('login')}</Title>
       <Form onFinish={handleFinish} requiredMark={false}>
         <Form.Item
@@ -49,7 +49,7 @@ function GetCode({ onSubmit }: Props) {
           </StyledButton>
         </Form.Item>
       </Form>
-    </>
+    </FormWrapper>
   );
 }
 
