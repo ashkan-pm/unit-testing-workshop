@@ -24,16 +24,15 @@ function OTPInput({ values, disabled, error, onChange, onFocus, onSubmit }: Prop
     }
   }, [activeInput]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleChange = (event: React.FormEvent<HTMLInputElement>, index: number) => {
     const updatedValues = [...values];
     updatedValues[index] = event.currentTarget.value;
     onChange(updatedValues);
 
     const emptyIndex = updatedValues.indexOf('');
-    if (activeInput === values.length - 1 || emptyIndex === -1) {
-      setActiveInput(emptyIndex);
+    if (activeInput === values.length - 1) {
+      setActiveInput(-1);
       if (emptyIndex === -1) onSubmit(updatedValues.join(''));
-
       return;
     }
 
@@ -46,7 +45,7 @@ function OTPInput({ values, disabled, error, onChange, onFocus, onSubmit }: Prop
         <StyledFormItem key={index} validateStatus={error ? 'error' : ''} $value={value}>
           <Input
             value={value}
-            onChange={(event) => {
+            onInput={(event) => {
               handleChange(event, index);
             }}
             onFocus={(event) => {

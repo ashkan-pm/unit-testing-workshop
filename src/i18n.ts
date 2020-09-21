@@ -20,7 +20,10 @@ i18n.use(initReactI18next).init({
         crap: 'Crap!',
         crapDescription: "I don't know what happened, but you were not supposed to see this.",
         yourFault: 'You messed up!',
-        yourFaultDescription: "I didn't do anything this time. This is all your fault."
+        yourFaultDescription: "I didn't do anything this time. This is all your fault.",
+        unauthorized: 'Guessing the number, huh?',
+        unauthorizedDescription:
+          'There are 46656 possibilites and I will murder your entire family on your 20th try. Suit yourself!'
       }
     }
   },

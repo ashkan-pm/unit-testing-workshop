@@ -21,6 +21,13 @@ function networkErrorNotification(error: string) {
       });
       break;
 
+    case '401':
+      notification.error({
+        message: <ErrorTranslation translationKey="unauthorized" />,
+        description: <ErrorTranslation translationKey="unauthorizedDescription" />
+      });
+      break;
+
     default:
       notification.error({
         message: <ErrorTranslation translationKey="crap" />,
