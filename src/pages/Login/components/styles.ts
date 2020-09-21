@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { Input, Button } from 'antd';
 import OTPInput from 'components/OTPInput';
 
-export const StyledInput = styled(Input)`
-  width: 260px;
-`;
-
-export const StyledButton = styled(Button)`
-  margin-top: 8px;
-`;
-
 export const FormWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -20,6 +12,14 @@ export const FormWrapper = styled.div`
     width: 100%;
     justify-content: space-between;
   }
+`;
+
+export const StyledInput = styled(Input)`
+  width: 260px;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-top: 8px;
 `;
 
 export const StyledOTPInput = styled(OTPInput)`

@@ -13,7 +13,7 @@ function Verify({ onBack }: Props) {
   return (
     <FormWrapper>
       <Title level={4}>{t('proveIt')}</Title>
-      <StyledOTPInput />
+      <StyledOTPInput length={6} />
       <div>
         <Button onClick={onBack}>{t('goBack')}</Button>
         <Button type="primary">{t('verify')}</Button>
