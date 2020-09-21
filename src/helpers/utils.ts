@@ -1,4 +1,4 @@
-async function post(
+async function httpPost(
   url: string,
   { body, parseJson = true }: { body: { [key: string]: string }; parseJson?: boolean }
 ) {
@@ -14,16 +14,38 @@ async function post(
   return parseJson ? response.json() : response;
 }
 
+async function httpGet(
+  url: string,
+  { auth = false, parseJson = true }: { auth?: boolean; parseJson?: boolean }
+) {
+  const headers = new Headers();
+
+  if (auth) {
+    headers.append('Authorization', getToken() || '');
+  }
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers
+  });
+
+  if (!response.ok) {
+    throw new Error(String(response.status));
+  }
+
+  return parseJson ? response.json() : response;
+}
+
 function setToken(token: string) {
   localStorage.setItem('token', token);
 }
 
 function getToken() {
-  localStorage.getItem('token');
+  return localStorage.getItem('token');
 }
 
 function removeToken() {
   localStorage.removeItem('token');
 }
 
-export { post, setToken, getToken, removeToken };
+export { httpPost, httpGet, setToken, getToken, removeToken };

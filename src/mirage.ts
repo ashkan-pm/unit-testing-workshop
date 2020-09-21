@@ -38,18 +38,18 @@ const server = new Server({
     });
 
     this.get('/user', (_, request) => {
-      const { Authorization } = request.requestHeaders;
+      const { authorization } = request.requestHeaders;
 
-      if (!Authorization) {
+      if (!authorization) {
         return new Response(400);
       }
 
-      const secret = Authorization.split(':')[0];
+      const secret = authorization.split(':')[0];
       if (secret !== SECRET_TOKEN) {
         return new Response(401);
       }
 
-      const id = Authorization.split(':')[1];
+      const id = authorization.split(':')[1];
       const user = server.db.users.findBy({ id });
       if (!user) {
         return new Response(404);
