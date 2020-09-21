@@ -7,7 +7,7 @@ const SECRET_TOKEN = 'super_secure_token';
 const server = new Server({
   routes() {
     this.namespace = 'api';
-    this.timing = 2000;
+    this.timing = 0;
 
     this.post('/verify', (_, request) => {
       const { email } = JSON.parse(request.requestBody);

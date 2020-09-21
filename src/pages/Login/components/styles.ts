@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Input, Button } from 'antd';
-import OTPInput from 'components/OTPInput';
 
 export const FormWrapper = styled.div`
   display: flex;
@@ -20,8 +19,4 @@ export const StyledInput = styled(Input)`
 
 export const StyledButton = styled(Button)`
   margin-top: 8px;
-`;
-
-export const StyledOTPInput = styled(OTPInput)`
-  margin-bottom: 28px;
 `;

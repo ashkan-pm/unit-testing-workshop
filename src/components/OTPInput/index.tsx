@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyledInput } from './styles';
+import { Input } from 'antd';
+import { StyledFormItem } from './styles';
 
 type Props = {
-  className?: string;
-  length: number;
+  values: string[];
   disabled?: boolean;
+  error?: boolean;
+  onChange: (values: string[]) => void;
+  onFocus: () => void;
+  onSubmit: (value: string) => void;
 };
-function OTPInput({ className, length, disabled }: Props) {
-  const [values, setValues] = useState(Array(length).fill(''));
+function OTPInput({ values, disabled, error, onChange, onFocus, onSubmit }: Props) {
   const [activeInput, setActiveInput] = useState(0);
-  const focusList = useRef(Array(length).fill(null));
+  const focusList = useRef(Array(values.length).fill(null));
 
   useEffect(() => {
     if (focusList.current[activeInput]) {
@@ -24,10 +27,13 @@ function OTPInput({ className, length, disabled }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const updatedValues = [...values];
     updatedValues[index] = event.currentTarget.value;
-    setValues(updatedValues);
+    onChange(updatedValues);
 
-    if (activeInput === length - 1 || updatedValues.indexOf('') === -1) {
-      setActiveInput(updatedValues.indexOf(''));
+    const emptyIndex = updatedValues.indexOf('');
+    if (activeInput === values.length - 1 || emptyIndex === -1) {
+      setActiveInput(emptyIndex);
+      if (emptyIndex === -1) onSubmit(updatedValues.join(''));
+
       return;
     }
 
@@ -35,16 +41,16 @@ function OTPInput({ className, length, disabled }: Props) {
   };
 
   return (
-    <div className={className}>
-      {values.map((value, index) => {
-        return (
-          <StyledInput
-            key={index}
+    <div>
+      {values.map((value, index) => (
+        <StyledFormItem key={index} validateStatus={error ? 'error' : ''} $value={value}>
+          <Input
             value={value}
             onChange={(event) => {
               handleChange(event, index);
             }}
             onFocus={(event) => {
+              onFocus();
               setActiveInput(index);
               event.target.select();
             }}
@@ -58,8 +64,8 @@ function OTPInput({ className, length, disabled }: Props) {
             maxLength={1}
             disabled={disabled}
           />
-        );
-      })}
+        </StyledFormItem>
+      ))}
     </div>
   );
 }
