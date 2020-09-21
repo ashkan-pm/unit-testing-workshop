@@ -1,18 +1,29 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Typography, Button } from 'antd';
 import { State } from 'redux/ducks/reducers';
+import { removeToken } from 'helpers/utils';
 const { Title } = Typography;
 
 function Home() {
   const { name } = useSelector((state: State) => state.user);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    removeToken();
+    navigate('/login');
+  };
 
   return (
-    <Title level={4}>
-      {t('welcome')}, {name}!
-    </Title>
+    <>
+      <Title level={4}>
+        {t('welcome')}, {name}!
+      </Title>
+      <Button onClick={handleLogout}>{t('logout')}</Button>
+    </>
   );
 }
 

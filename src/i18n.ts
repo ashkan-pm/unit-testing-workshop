@@ -6,6 +6,7 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         welcome: 'Welcome',
+        logout: 'Log out',
         notFound: 'You seem to have lost your way...',
         login: 'Who are you?',
         email: 'Email',
