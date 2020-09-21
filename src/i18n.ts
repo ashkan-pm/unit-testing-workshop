@@ -7,7 +7,13 @@ i18n.use(initReactI18next).init({
       translation: {
         home: 'Home',
         notFound: 'You seem to have lost your way...',
-        testing: 'Testing!'
+        login: 'Who are you?',
+        email: 'Email',
+        emailExample: 'george.carlin@example.com',
+        emailRequired: 'I really need your email!',
+        emailInvalid: 'You know what email is, right?',
+        emailNotGmail: "Gmail only! Don't ask why.",
+        getCode: 'Get code!'
       }
     }
   },
