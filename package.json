@@ -17,6 +17,7 @@
     "framer-motion": "^2.6.15",
     "history": "^5.0.0",
     "i18next": "^19.7.0",
+    "miragejs": "^0.1.40",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
