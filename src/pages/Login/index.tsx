@@ -2,13 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography, Form } from 'antd';
 import { Rule } from 'antd/lib/form';
+import { isGmailAddress } from 'helpers/validators';
 import { StyledInput, StyledButton } from './styles';
 const { Title } = Typography;
-
-function isGmailAddress(email: string) {
-  if (/@gmail\.com$/.test(email)) return true;
-  return false;
-}
 
 function Login() {
   const { t } = useTranslation();
