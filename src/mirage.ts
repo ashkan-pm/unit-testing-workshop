@@ -9,8 +9,14 @@ const server = new Server({
     this.namespace = 'api';
     this.timing = 2000;
 
-    this.post('/verify', () => {
-      return { done: true };
+    this.post('/verify', (_, request) => {
+      const { email } = JSON.parse(request.requestBody);
+
+      if (!email) {
+        return new Response(400);
+      }
+
+      return new Response(204);
     });
 
     this.post('/login', (_, request) => {

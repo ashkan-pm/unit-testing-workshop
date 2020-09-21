@@ -16,7 +16,11 @@ i18n.use(initReactI18next).init({
         getCode: 'Get code!',
         proveIt: 'Prove it!',
         goBack: 'Go back',
-        verify: 'Verify'
+        verify: 'Verify',
+        crap: 'Crap!',
+        crapDescription: "I don't know what happened, but you were not supposed to see this.",
+        yourFault: 'You messed up!',
+        yourFaultDescription: "I didn't do anything this time. This is all your fault."
       }
     }
   },

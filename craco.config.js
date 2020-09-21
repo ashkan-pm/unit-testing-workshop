@@ -12,7 +12,8 @@ module.exports = {
           'primary-color': '#883b75',
           'error-color': '#ff3b21',
           'typography-title-margin-bottom': '1em',
-          'form-item-margin-bottom': '28px'
+          'form-item-margin-bottom': '28px',
+          'notification-bg': '#441e3b'
         }
       }
     }
