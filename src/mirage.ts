@@ -37,19 +37,19 @@ const server = new Server({
       return { name: user.name, token: `super_secure_token:${user.id}` };
     });
 
-    this.post('/validate', (_, request) => {
-      const { token } = JSON.parse(request.requestBody);
+    this.get('/user', (_, request) => {
+      const { Authorization } = request.requestHeaders;
 
-      if (!token) {
+      if (!Authorization) {
         return new Response(400);
       }
 
-      const secret = token.split(':')[0];
+      const secret = Authorization.split(':')[0];
       if (secret !== SECRET_TOKEN) {
         return new Response(401);
       }
 
-      const id = token.split(':')[1];
+      const id = Authorization.split(':')[1];
       const user = server.db.users.findBy({ id });
       if (!user) {
         return new Response(404);

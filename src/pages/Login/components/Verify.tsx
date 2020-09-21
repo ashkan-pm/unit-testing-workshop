@@ -7,6 +7,7 @@ import { State } from 'redux/ducks/reducers';
 import OTPInput from 'components/OTPInput';
 import { networkErrorNotification } from 'components/ErrorTranslation';
 import { login } from 'helpers/api';
+import { setToken } from 'helpers/utils';
 import { FormWrapper } from './styles';
 const { Title } = Typography;
 
@@ -36,7 +37,8 @@ function Verify({ onBack }: Props) {
       }
 
       setIsLoading(true);
-      await login(email, value);
+      const { token } = await login(email, value);
+      setToken(token);
       navigate('/');
     } catch (error) {
       networkErrorNotification(error.message);
