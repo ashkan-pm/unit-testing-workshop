@@ -13,7 +13,10 @@ i18n.use(initReactI18next).init({
         emailRequired: 'I really need your email!',
         emailInvalid: 'You know what email is, right?',
         emailNotGmail: "Gmail only! Don't ask why.",
-        getCode: 'Get code!'
+        getCode: 'Get code!',
+        proveIt: 'Prove it!',
+        goBack: 'Go back',
+        verify: 'Verify'
       }
     }
   },

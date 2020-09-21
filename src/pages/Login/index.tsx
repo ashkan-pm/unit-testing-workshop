@@ -1,49 +1,18 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Typography, Form } from 'antd';
-import { Rule } from 'antd/lib/form';
-import { isGmailAddress } from 'helpers/validators';
-import { StyledInput, StyledButton } from './styles';
-const { Title } = Typography;
+import React, { useState } from 'react';
+import GetCode from './components/GetCode';
+import Verify from './components/Verify';
 
 function Login() {
-  const { t } = useTranslation();
+  const [isVerify, setIsVerify] = useState(true);
 
-  const normalizeEmail = (value: string) => value.trim();
-  const emailRules: Rule[] = [
-    { required: true, message: t('emailRequired') },
-    { type: 'email', message: t('emailInvalid') },
-    () => ({
-      validator(_, value) {
-        if (isGmailAddress(value)) {
-          return Promise.resolve();
-        }
-        return Promise.reject(t('emailNotGmail'));
-      }
-    })
-  ];
+  const showGetCode = () => {
+    setIsVerify(false);
+  };
+  const showVerify = () => {
+    setIsVerify(true);
+  };
 
-  return (
-    <>
-      <Title level={4}>{t('login')}</Title>
-      <Form requiredMark={false}>
-        <Form.Item
-          label={t('email')}
-          name="email"
-          normalize={normalizeEmail}
-          rules={emailRules}
-          validateFirst
-        >
-          <StyledInput placeholder={t('emailExample')} />
-        </Form.Item>
-        <Form.Item>
-          <StyledButton type="primary" htmlType="submit" block>
-            {t('getCode')}
-          </StyledButton>
-        </Form.Item>
-      </Form>
-    </>
-  );
+  return !isVerify ? <GetCode onSubmit={showVerify} /> : <Verify onBack={showGetCode} />;
 }
 
 export default Login;
