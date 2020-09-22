@@ -43,6 +43,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/test-utils/"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
