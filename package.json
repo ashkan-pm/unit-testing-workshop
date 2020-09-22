@@ -5,7 +5,7 @@
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^7.1.2",
     "@types/faker": "^5.1.0",
     "@types/jest": "^24.0.0",
@@ -20,6 +20,7 @@
     "framer-motion": "^2.6.15",
     "history": "^5.0.0",
     "i18next": "^19.7.0",
+    "jest-styled-components": "^7.0.3",
     "miragejs": "^0.1.40",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
@@ -27,7 +28,7 @@
     "react-i18next": "^11.7.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "styled-components": "^5.2.0",
     "typescript": "~3.7.2"
@@ -40,6 +41,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": ["**/src/**/*.{js,jsx,ts,tsx}"]
   },
   "browserslist": {
     "production": [
