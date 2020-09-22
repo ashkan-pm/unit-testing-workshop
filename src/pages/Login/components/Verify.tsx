@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Typography, Button } from 'antd';
+import Typography from 'antd/lib/typography';
+import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { State } from 'redux/ducks/reducers';
 import { updateUser } from 'redux/ducks/user';

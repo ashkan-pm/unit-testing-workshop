@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from 'antd';
+import Typography from 'antd/lib/typography';
 const { Title } = Typography;
 
 function NotFound() {

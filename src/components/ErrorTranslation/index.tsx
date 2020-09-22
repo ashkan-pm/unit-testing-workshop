@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, notification } from 'antd';
+import Typography from 'antd/lib/typography';
+import { notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 const { Text } = Typography;
 
