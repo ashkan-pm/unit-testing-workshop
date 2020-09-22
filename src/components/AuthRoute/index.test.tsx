@@ -4,16 +4,16 @@ import { renderWithRouter, screen } from 'test-utils';
 import { getToken } from 'helpers/utils';
 import AuthRoute from './index';
 
+const mockGetToken = getToken as jest.MockedFunction<typeof getToken>;
 jest.mock('helpers/utils', () => ({
   getToken: jest.fn(() => null)
 }));
-const mockGetToken = getToken as jest.MockedFunction<typeof getToken>;
 
+const MockNavigate = Navigate as jest.MockedFunction<typeof Navigate>;
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   Navigate: jest.fn(() => null)
 }));
-const MockNavigate = Navigate as jest.MockedFunction<typeof Navigate>;
 
 const TestComponent = ({ text }: { text?: string }) => <span>{text}</span>;
 
