@@ -6,8 +6,8 @@ type Props = {
   path: string;
   element: React.ReactElement;
 };
-function PrivateRoute({ path, element }: Props) {
-  return <Route path={path} element={<AuthPage>{element}</AuthPage>} />;
+function AuthRoute({ element }: Props) {
+  return <Route element={<AuthPage>{element}</AuthPage>} />;
 }
 
-export default PrivateRoute;
+export default AuthRoute;
