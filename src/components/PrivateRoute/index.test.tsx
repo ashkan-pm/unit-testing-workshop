@@ -1,12 +1,14 @@
 import React from 'react';
 import { Routes, Navigate } from 'react-router-dom';
-import { renderWithAllProviders, screen } from 'test-utils';
+import { renderWithAllProviders, screen, waitFor } from 'test-utils';
+import { startMirage } from 'mirage';
 import { getToken, removeToken } from 'helpers/utils';
 import PrivateRoute from './index';
 
 const mockGetToken = getToken as jest.MockedFunction<typeof getToken>;
 const mockRemoveToken = removeToken as jest.MockedFunction<typeof removeToken>;
 jest.mock('helpers/utils', () => ({
+  ...jest.requireActual('helpers/utils'),
   getToken: jest.fn(() => null),
   removeToken: jest.fn(() => null)
 }));
@@ -53,7 +55,8 @@ test('Redirects to /login if token does not exist', () => {
   expect(MockNavigate).toHaveBeenCalledWith({ to: '/login', replace: true }, {});
 });
 
-test('Redirects to /login and removes token if it can not fetch user', () => {
+test('Redirects to /login and removes token if it can not fetch user', async () => {
+  const server = startMirage();
   const path = '/';
   const text = 'Test';
   mockGetToken.mockReturnValueOnce('token');
@@ -64,6 +67,7 @@ test('Redirects to /login and removes token if it can not fetch user', () => {
     </Routes>,
     { initialEntries: [path] }
   );
-  expect(mockRemoveToken).toHaveBeenCalledTimes(1);
+  await waitFor(() => expect(mockRemoveToken).toHaveBeenCalledTimes(1));
   expect(mockNavigate).toHaveBeenCalledWith('/login', { replace: true });
+  server.shutdown();
 });

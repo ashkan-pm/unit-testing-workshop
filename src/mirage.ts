@@ -4,62 +4,69 @@ import faker from 'faker';
 const SECRET_CODE = '132435';
 const SECRET_TOKEN = 'super_secure_token';
 
-const server = new Server({
-  routes() {
-    this.namespace = 'api';
-    this.timing = 2000;
+function startMirage() {
+  const server = new Server({
+    environment: process.env.NODE_ENV,
+    routes() {
+      this.namespace = 'api';
+      this.timing = 2000;
 
-    this.post('/verify', (_, request) => {
-      const { email } = JSON.parse(request.requestBody);
+      this.post('/verify', (_, request) => {
+        const { email } = JSON.parse(request.requestBody);
 
-      if (!email) {
-        return new Response(400);
-      }
+        if (!email) {
+          return new Response(400);
+        }
 
-      return new Response(204);
-    });
+        return new Response(204);
+      });
 
-    this.post('/login', (_, request) => {
-      const { email, code } = JSON.parse(request.requestBody);
+      this.post('/login', (_, request) => {
+        const { email, code } = JSON.parse(request.requestBody);
 
-      if (!email || !code) {
-        return new Response(400);
-      }
-      if (code !== SECRET_CODE) {
-        return new Response(401);
-      }
+        if (!email || !code) {
+          return new Response(400);
+        }
+        if (code !== SECRET_CODE) {
+          return new Response(401);
+        }
 
-      let user = server.db.users.findBy({ email });
-      if (!user) {
-        user = server.db.users.insert({ email, name: faker.name.firstName() });
-      }
+        let user = server.db.users.findBy({ email });
+        if (!user) {
+          user = server.db.users.insert({ email, name: faker.name.firstName() });
+        }
 
-      return { name: user.name, token: `super_secure_token:${user.id}` };
-    });
+        return { name: user.name, token: `super_secure_token:${user.id}` };
+      });
 
-    this.get('/user', (_, request) => {
-      const { authorization } = request.requestHeaders;
+      this.get('/user', (_, request) => {
+        const { authorization } = request.requestHeaders;
 
-      if (!authorization) {
-        return new Response(400);
-      }
+        if (!authorization) {
+          return new Response(400);
+        }
 
-      const secret = authorization.split(':')[0];
-      if (secret !== SECRET_TOKEN) {
-        return new Response(401);
-      }
+        const secret = authorization.split(':')[0];
+        if (secret !== SECRET_TOKEN) {
+          return new Response(401);
+        }
 
-      const id = authorization.split(':')[1];
-      const user = server.db.users.findBy({ id });
-      if (!user) {
-        return new Response(404);
-      }
+        const id = authorization.split(':')[1];
+        const user = server.db.users.findBy({ id });
+        if (!user) {
+          return new Response(404);
+        }
 
-      return user;
-    });
-  }
-});
+        return user;
+      });
+    }
+  });
 
-server.db.loadData({
-  users: [{ email: 'unit@gmail.com', name: 'Orwell' }]
-});
+  server.db.loadData({
+    users: [{ email: 'unit@gmail.com', name: 'Orwell' }]
+  });
+
+  return server;
+}
+
+export { startMirage };
